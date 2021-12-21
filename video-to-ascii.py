@@ -44,6 +44,3 @@ except KeyboardInterrupt:
         try:os.remove("image"+str(dele)+".jpg");dele+=1
         except:dele+=1
     os.system("mode con cols=100 lines=30 ")
-        
-        
-    
