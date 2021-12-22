@@ -1,4 +1,5 @@
 import os
+import sys
 from time import sleep as sleep
 
 import glob
@@ -40,11 +41,14 @@ symbols = list(r'$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1[]?-_+~<>i!lI;:, 
 if rev:
     symbols.reverse()
 
+stdout = os.fdopen(sys.stdout.fileno(), 'wb', video_columns * video_lines * 2)
+
 try:
     while True:
         success, image = vidcap.read()
         
         if not success:
+            set_console_size(100, 30)
             break
 
         im = Image.fromarray(image)
@@ -58,7 +62,8 @@ try:
                 result.append(symbols[int(pixels[x, y] / 36) - 1])
             result.append('\n')
 
-        print(''.join(result))
+        stdout.write(''.join(result).encode())
+        stdout.flush()
 
         sleep(0.016)
 except KeyboardInterrupt:
