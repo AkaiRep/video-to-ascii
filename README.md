@@ -3,6 +3,8 @@
 video-to-ascii
 ========================
 Скрипт который выводит видео в консоль. Ничего лишнего)
+## Установка Python
+* Установить Python 3.10 можно с сайта ["тык"](https://www.python.org/ftp/python/3.10.1/python-3.10.1-amd64.exe)
 ## Установки
 ```
 pip install opencv-python
