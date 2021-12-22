@@ -1,4 +1,4 @@
-![](https://komarev.com/ghpvc/?username=AkaiRep/video-to-ascii)
+![](https://komarev.com/ghpvc/?username=AkaiRep-video-to-ascii)
 video-to-ascii
 ========================
 Скрипт который выводит видео в консоль. Ничего лишнего)
