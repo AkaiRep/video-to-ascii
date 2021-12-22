@@ -6,6 +6,17 @@ import glob
 import cv2
 from PIL import Image
 
+ESC = b'\033'
+CSI = ESC + b'['
+
+# Linux and new Windows supports ANSI Escape Sequences
+use_ansi_escape_sequences = True
+
+if not use_ansi_escape_sequences:
+    import ctypes
+    from ctypes import c_long
+
+    console_handle = ctypes.windll.kernel32.GetStdHandle(c_long(-11))
 
 video_columns, video_lines = 140, 70
 rev = True
@@ -62,6 +73,12 @@ try:
                 result.append(symbols[int(pixels[x, y] / 36) - 1])
             result.append('\n')
 
+        # Set cursor to the top left corner
+        if use_ansi_escape_sequences:
+            stdout.write(CSI + b'1;1H')
+        else:
+            ctypes.windll.kernel32.SetConsoleCursorPosition(console_handle, 0)
+        
         stdout.write(''.join(result).encode())
         stdout.flush()
 
