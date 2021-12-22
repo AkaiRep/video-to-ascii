@@ -11,32 +11,30 @@ rev = True
 
 os.system('cls')
 os.system('mode con cols=40 lines=20 ')
-y = 0
+selected_video_number = 0
 
 videos = glob.glob('*.mp4')
 
-while y < len(videos):
-    print(f'[{y + 1}] - {videos[y]}')
-    y += 1
+for video_index, video_name in enumerate(videos):
+    print(f'[{video_index + 1}] - {video_name}')
 
-cmd = input('\nВведите номер видео: ')
+selected_video_number = input('\nВведите номер видео: ')
 
 try:
-    cmd = videos[int(cmd) - 1]
+    selected_video = videos[int(selected_video_number) - 1]
 except:
     os.system('mode con cols=100 lines=30 ')
-    print(f'{cmd} - неверный номер X_X')
+    print(f'{selected_video_number} - неверный номер X_X')
     exit()
 
-vidcap = cv2.VideoCapture(cmd)
+vidcap = cv2.VideoCapture(selected_video)
 success, image = vidcap.read()
-dele, number, count = 1,1,1
 
-os.system(f'mode con cols={columns} lines{lines}')
-scale = list(r'$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1[]?-_+~<>i!lI;:,   ')
+os.system(f'mode con cols={columns} lines={lines}')
+symbols = list(r'$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1[]?-_+~<>i!lI;:,   ')
 
 if rev:
-    scale.reverse()
+    symbols.reverse()
 
 try:
     while True:
@@ -44,19 +42,16 @@ try:
         im = Image.fromarray(image)
         im = im.resize((columns, lines))
         im = im.convert('L')
-        pix = im.load()
+        pixels = im.load()
         result = []
-        x, y = 1, 1
-        while y < lines:
-            x = 1
-            while x < columns:
-                result.append(scale[int(pix[x, y] / 36) - 1])
-                x += 1
+
+        for y in range(1, lines):
+            for x in range(1, columns):
+                result.append(symbols[int(pixels[x, y] / 36) - 1])
             result.append('\n')
-            y += 1
+
         print(''.join(result))
-        number += 1
-        count += 1
+
         sleep(0.016)
 except KeyboardInterrupt:
     os.system("mode con cols=100 lines=30 ")
