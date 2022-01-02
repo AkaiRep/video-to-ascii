@@ -19,7 +19,7 @@ if not use_ansi_escape_sequences:
     console_handle = ctypes.windll.kernel32.GetStdHandle(c_long(-11))
 
 video_columns, video_lines = 140, 70
-rev = True
+has_inverted_colors = True
 
 def set_console_size(columns, lines):
     os.system(f'mode con cols={columns} lines={lines} ')
@@ -49,7 +49,7 @@ success, image = vidcap.read()
 set_console_size(video_columns, video_lines)
 symbols = list(r'$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1[]?-_+~<>i!lI;:,   ')
 
-if rev:
+if has_inverted_colors:
     symbols.reverse()
 
 stdout = os.fdopen(sys.stdout.fileno(), 'wb', video_columns * video_lines * 2)
@@ -82,6 +82,6 @@ try:
         stdout.write(''.join(result).encode())
         stdout.flush()
 
-        sleep(0.016)
+        sleep(1 / 60) # Sleep one sixtieth of a second (60 fps)
 except KeyboardInterrupt:
     set_console_size(100, 30)
