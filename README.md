@@ -1,6 +1,6 @@
 ![](https://komarev.com/ghpvc/?username=AkaiRep-video-to-ascii)
 
-# English Readme is ["here"](https://www.python.org/ftp/python/3.10.1/python-3.10.1-amd64.exe)
+# English Readme is ["here"](https://github.com/AkaiRep/video-to-ascii/blob/main/README-english.md)
 
 video-to-ascii
 ========================
