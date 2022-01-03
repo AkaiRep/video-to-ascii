@@ -1,5 +1,7 @@
 ![](https://komarev.com/ghpvc/?username=AkaiRep-video-to-ascii)
 
+# English Readme is ["here"](https://www.python.org/ftp/python/3.10.1/python-3.10.1-amd64.exe)
+
 video-to-ascii
 ========================
 Скрипт который выводит видео в консоль. Ничего лишнего)
