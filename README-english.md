@@ -1,4 +1,4 @@
-##TRANSLATED BY ["BlaizerBrumo"](https://github.com/BlaizerBrumo)
+## TRANSLATED BY ["BlaizerBrumo"](https://github.com/BlaizerBrumo)
 
 ![](https://komarev.com/ghpvc/?username=AkaiRep-video-to-ascii)
 
