@@ -19,7 +19,6 @@ if not use_ansi_escape_sequences:
     console_handle = ctypes.windll.kernel32.GetStdHandle(c_long(-11))
 
 video_columns, video_lines = 140, 70
-has_inverted_colors = True
 
 def set_console_size(columns, lines):
     os.system(f'mode con cols={columns} lines={lines} ')
@@ -35,6 +34,15 @@ for video_index, video_name in enumerate(videos):
     print(f'[{video_index + 1}] - {video_name}')
 
 selected_video_number = input('\nВведите номер видео: ')
+
+try:
+    fps = int(input("Required FPS:"))
+    has_inverted_colors = bool(input("Inverted colors?(True:False):"))
+    loop = bool(input("Loop Video?(True:False):"))
+except:
+    fps = 30
+    has_inverted_colors = True
+    loop = False
 
 try:
     selected_video = videos[int(selected_video_number) - 1]
@@ -57,10 +65,10 @@ stdout = os.fdopen(sys.stdout.fileno(), 'wb', video_columns * video_lines * 2)
 try:
     while True:
         success, image = vidcap.read()
-        
-        if not success:
-            set_console_size(100, 30)
-            break
+        #Loop video if end reached
+        if not success and loop:
+            vidcap.open(selected_video)
+                continue
 
         im = Image.fromarray(image)
         im = im.resize((video_columns, video_lines))
@@ -82,6 +90,6 @@ try:
         stdout.write(''.join(result).encode())
         stdout.flush()
 
-        sleep(1 / 60) # Sleep one sixtieth of a second (60 fps)
+        sleep(1 / fps)
 except KeyboardInterrupt:
     set_console_size(100, 30)
