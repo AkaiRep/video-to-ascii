@@ -68,7 +68,7 @@ try:
         #Loop video if end reached
         if not success and loop:
             vidcap.open(selected_video)
-                continue
+            continue
 
         im = Image.fromarray(image)
         im = im.resize((video_columns, video_lines))
